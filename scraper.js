@@ -1,10 +1,6 @@
 const rp = require('request-promise');
 const cheerio = require('cheerio').default;
 const nodemailer = require('nodemailer');
-const express = require('express')
-const app = express()
-const port = 3000
-
 
 const url = 'http://www.mumresults.in/';
 const jar = true;
@@ -55,7 +51,3 @@ numbersToMessage.forEach(async number => {
   console.log(message.status)
 });}
 
-
-app.listen(port, () => {
-  console.log(`nodemailerProject is listening at http://localhost:${port}`)
-})
