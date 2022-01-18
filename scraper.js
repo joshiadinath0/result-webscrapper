@@ -1,6 +1,10 @@
 const rp = require('request-promise');
 const cheerio = require('cheerio').default;
 const nodemailer = require('nodemailer');
+const express = require('express')
+const app = express()
+const port = 3000
+
 
 const url = 'http://www.mumresults.in/';
 const jar = true;
@@ -27,7 +31,7 @@ async function checkStatus() {
     
     // check availablity by looking at text
     var availability =  cheerio('div.main > div.content_holder > div.content > div.row > table.counterthree > tbody >tr > td.exam > span >a', html);
-    if(!`${availability}.text()`.toLowerCase().includes("electronics and telecommunication")) {
+    if(`${availability}.text()`.toLowerCase().includes("electronics and telecommunication")) {
         twilio('Result is out',accountSid,authToken);   
         console.log(`${availability}.text()`.toLowerCase().includes("electronics and telecommunication"));
     }
@@ -43,10 +47,15 @@ client.messages
 numbersToMessage = ['+917400383241']
 numbersToMessage.forEach(async number => {
   const message = await client.messages.create({
-    body: 'Result is out!',
+    body: twilioMessage,
     messagingServiceSid: 'MG4053db6e95f16f40ee63b60424bd034c',
     from: '+19147642868',
-    to: number
+    to: '+917400383241'
   });
   console.log(message.status)
 });}
+
+
+app.listen(port, () => {
+  console.log(`nodemailerProject is listening at http://localhost:${port}`)
+})
