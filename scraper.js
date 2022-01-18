@@ -27,7 +27,7 @@ async function checkStatus() {
     
     // check availablity by looking at text
     var availability =  cheerio('div.main > div.content_holder > div.content > div.row > table.counterthree > tbody >tr > td.exam > span >a', html);
-    if(`${availability}.text()`.toLowerCase().includes("electronics and telecommunication")) {
+    if(!`${availability}.text()`.toLowerCase().includes("electronics and telecommunication")) {
         twilio('Result is out',accountSid,authToken);   
         console.log(`${availability}.text()`.toLowerCase().includes("electronics and telecommunication"));
     }
@@ -46,7 +46,7 @@ numbersToMessage.forEach(async number => {
     body: 'Result is out!',
     messagingServiceSid: 'MG4053db6e95f16f40ee63b60424bd034c',
     from: '+19147642868',
-    to: number
+    to: '+917400383241'
   });
   console.log(message.status)
 });}
