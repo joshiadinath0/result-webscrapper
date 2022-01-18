@@ -25,14 +25,13 @@ async function loop() {
 async function checkStatus() {
     const response = await rp(options).then(function(html){
     
-    // check availablity by looking at text
     var availability =  cheerio('div.main > div.content_holder > div.content > div.row > table.counterthree > tbody >tr > td.exam > span >a', html);
     if(`${availability}.text()`.toLowerCase().includes("electronics and telecommunication")) {
         twilio('Result is out',accountSid,authToken);   
         console.log(`${availability}.text()`.toLowerCase().includes("electronics and telecommunication"));
     }
   }).catch(function(err){
-    // handle error
+    
     console.log(err);
   });
   }
