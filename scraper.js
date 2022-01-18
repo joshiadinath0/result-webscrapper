@@ -10,7 +10,7 @@ var options = {
 };
 
 const accountSid = "AC301dd2f5aa8c7520737e10dafc096679";
-const authToken = "5d16bd53ac234cd51b652e77a7fce3ab";
+const authToken = "bffb9e89d9f19ffce8f58c7599adb0b1";
 const client = require('twilio')(accountSid, authToken);
 
 loop();
@@ -40,13 +40,13 @@ async function checkStatus() {
   function twilio(twilioMessage,accountSid,authToken) {
 const client = require('twilio')(accountSid, authToken);  
 client.messages 
-numbersToMessage = ['+917400383241','+918657440267','+919619096701']
+numbersToMessage = ['+917400383241']
 numbersToMessage.forEach(async number => {
   const message = await client.messages.create({
     body: 'Result is out!',
     messagingServiceSid: 'MG4053db6e95f16f40ee63b60424bd034c',
     from: '+19147642868',
-    to: '+917400383241'
+    to: number
   });
   console.log(message.status)
 });}
